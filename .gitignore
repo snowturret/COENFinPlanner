@@ -1,3 +1,4 @@
 Spendy/.idea/*
-.classpath
-.project
+Spendy/.settings/*
+*.classpath
+*.project
