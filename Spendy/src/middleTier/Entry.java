@@ -17,9 +17,27 @@ public class Entry {
 		this.value = value;
 		this.description = description;
 	}
-	
+
+	public Date getEntryDate() {
+		return entryDate;
+	}
+
+	public EntryType getCategory() {
+		return category;
+	}
+
+	public float getValue() {
+		return value;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
 	// Just leaving here for now until we have a better place to put it
     public static void main(String[] args) {
         System.out.println("Hello, World");
     }
+
+
 }
