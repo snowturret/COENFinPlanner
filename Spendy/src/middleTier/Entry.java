@@ -34,7 +34,6 @@ public class Entry {
 		return description;
 	}
 
-
 	// Just leaving here for now until we have a better place to put it
     public static void main(String[] args) {
         System.out.println("Hello, World");

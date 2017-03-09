@@ -2,7 +2,7 @@ package middleTier;
 
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
+import java.util.*;
 import java.security.MessageDigest;
 
 /**
@@ -20,20 +20,6 @@ public class User {
         this.entries = new ArrayList<>();
     }
 
-    // could add it in UI part.
-    public String md5(String input) {
-        String md5 = null;
-        if(null == input) return null;
-        try {
-            MessageDigest digest = MessageDigest.getInstance("MD5");
-            digest.update(input.getBytes(), 0, input.length());
-            md5 = new BigInteger(1, digest.digest()).toString(16);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return md5;
-    }
-
     public boolean validation(String password){
         if(this.password.equals(password)) {
             return true;
@@ -42,15 +28,37 @@ public class User {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
+    public ArrayList<Entry> getEntries(){
+        return this.entries;
+    }
 
-    public ArrayList<Entry> getEntries() {
-        return entries;
+    public ArrayList<Entry> sortByDate(){
+        Comparator<Entry> resultComparator = new Comparator<Entry>() {
+            @Override
+            public int compare(Entry o1, Entry o2) {
+                return o2.getEntryDate().compareTo(o1.getEntryDate());
+            }
+        };
+        ArrayList<Entry> result = new ArrayList<Entry>((Collection<? extends Entry>) resultComparator);
+        return result;
+    }
+
+    public ArrayList<Entry> sortByCategory(){
+        Comparator<Entry> resultComparator = new Comparator<Entry>() {
+            @Override
+            public int compare(Entry o1, Entry o2) {
+                //ascending order
+                return o1.getCategory().compareTo(o2.getCategory());
+            }
+        };
+        ArrayList<Entry> result = new ArrayList<Entry>((Collection<? extends Entry>) resultComparator);
+        return result;
     }
 }
