@@ -63,7 +63,6 @@ public class LoginBox extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(btnLogin.getText().equals("register") ) {
                     if((getUsername() != null && !getUsername().isEmpty() &&  getPassword() != null && !getPassword().isEmpty())) {
-//                        Login.register(getUsername(), getPassword());
                         Spendy.register(getUsername(), getPassword());
                         JOptionPane.showMessageDialog(LoginBox.this,
                                 "Hi " + getUsername() + "! You have successfully registered.",

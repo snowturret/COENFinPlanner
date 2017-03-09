@@ -4,14 +4,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 /**
  * Created by raoyinchen on 3/5/17.
  */
 public class TrackBoard extends JFrame {
-    private JTextField activityStartDateInput;
-    private JTextField activityEndDateInput;
+    private JFormattedTextField activityStartDateInput;
+    private JFormattedTextField activityEndDateInput;
+//    private JTextField activityStartDateInput;
+//    private JTextField activityEndDateInput;
     private JTextField activityTypeInput;
     private JTextField activityTableInput;
     private JLabel activityStartDate;
@@ -44,8 +50,11 @@ public class TrackBoard extends JFrame {
         type.setLayout(new BoxLayout(type, BoxLayout.Y_AXIS));
         comment.setLayout(new BoxLayout(comment, BoxLayout.Y_AXIS));
 
-        activityStartDateInput = new JTextField(10);
-        activityEndDateInput = new JTextField(20);
+        DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        activityStartDateInput = new JFormattedTextField(format);
+        activityEndDateInput = new JFormattedTextField(format);
+//        activityStartDateInput = new JTextField(10);
+//        activityEndDateInput = new JTextField(20);
         activityTypeInput = new JTextField(20);
         activityTableInput = new JTextField(20);
         activityStartDate = new JLabel("Start Date('dd/mm/yyyy')");
@@ -53,10 +62,8 @@ public class TrackBoard extends JFrame {
         activityType = new JLabel("Type");
         activityTable = new JLabel("TableType");
 
-//        String[] typeChoices = { "entertainment","food", "gas","income","rent","others"};
-        String[] typeChoices = EntryType.type();
-
-        final JComboBox<String> cb = new JComboBox<String>(typeChoices);
+        final JComboBox<EntryType> comboBox = new JComboBox<>();
+        comboBox.setModel(new DefaultComboBoxModel<>(EntryType.values()));
 
         String[] tableChoices = { "chart","graph", "x-y"};
 
@@ -120,8 +127,8 @@ public class TrackBoard extends JFrame {
         panel.add(type, cs);
 
 
-        type.add(cb);
-        cb.setVisible(true);
+        type.add(comboBox);
+        comboBox.setVisible(true);
         cs.gridx = 1;
         cs.gridy = 1;
         cs.gridwidth = 1;
@@ -145,13 +152,22 @@ public class TrackBoard extends JFrame {
         inputButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                saveItems.put(activityStartDate.getText(),activityStartDateInput.getText());
-                saveItems.put(activityTable.getText(),String.valueOf(tc.getSelectedItem()));
-                saveItems.put(activityEndDate.getText(),activityEndDateInput.getText());
-                saveItems.put(activityType.getText(),String.valueOf(cb.getSelectedItem()));
+                Date startDate = (Date)activityStartDateInput.getValue();
+                Date endDate = (Date)activityEndDateInput.getValue();
+                EntryType type = (EntryType) comboBox.getSelectedItem();
+                String graph = String.valueOf(tc.getSelectedItem());
+
+                ArrayList<Entry> results = Spendy.trackingResults(startDate,endDate,type);
+                //pass results to generate graph
+
+
+//                saveItems.put(activityStartDate.getText(),activityStartDateInput.getText());
+//                saveItems.put(activityTable.getText(),String.valueOf(tc.getSelectedItem()));
+//                saveItems.put(activityEndDate.getText(),activityEndDateInput.getText());
+//                saveItems.put(activityType.getText(),String.valueOf(cb.getSelectedItem()));
 
                 JOptionPane.showMessageDialog(TrackBoard.this,
-                        "You have successfully saved the items.",
+                        "Graph generated!",
                         "Login",
                         JOptionPane.INFORMATION_MESSAGE);
                 getSpendInfo();

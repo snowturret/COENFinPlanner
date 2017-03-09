@@ -3,3 +3,4 @@ Spendy/.settings/*
 *.classpath
 *.project
 /.metadata
+*.class

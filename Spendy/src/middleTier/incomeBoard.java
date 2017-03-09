@@ -11,7 +11,7 @@ import java.util.HashMap;
 /**
  * Created by raoyinchen on 3/5/17.
  */
-public class incomeBoard extends JFrame {
+public class IncomeBoard extends JFrame {
     private JTextField activityDateInput;
     private JTextField activityMoneyInput;
     private JTextField activityTypeInput;
@@ -29,7 +29,7 @@ public class incomeBoard extends JFrame {
     HashMap<String,String> saveItems = new HashMap<>();
     MainScreen backToMain;
 
-    public incomeBoard(){
+    public IncomeBoard(){
 
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints cs = new GridBagConstraints();
@@ -127,7 +127,7 @@ public class incomeBoard extends JFrame {
                 saveItems.put(activityComment.getText(),activityCommentInput.getText());
                 saveItems.put(activityMoney.getText(),activityMoneyInput.getText());
 
-                JOptionPane.showMessageDialog(incomeBoard.this,
+                JOptionPane.showMessageDialog(IncomeBoard.this,
                         "You have successfully saved the items.",
                         "Login",
                         JOptionPane.INFORMATION_MESSAGE);
@@ -162,7 +162,7 @@ public class incomeBoard extends JFrame {
     }
 
 //    public static void main(String[] args) {
-//        incomeBoard income = new incomeBoard();
+//        IncomeBoard income = new IncomeBoard();
 //
 //    }
 }

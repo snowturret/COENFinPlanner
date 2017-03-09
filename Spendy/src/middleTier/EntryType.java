@@ -1,20 +1,18 @@
 package middleTier;
 
 public enum EntryType {
-	INCOME,
-	ENTERTAINMENT,
-	BILLS,
-	FOOD;	// catch-all for required food/drink
+	INCOME ("income"),
+	ENTERTAINMENT("entertainment"),
+	BILLS("bills"),
+	FOOD("food");	// catch-all for required food/drink
 
-	public static String[] type() {
-		EntryType[] entryTypes = values();
-		String[] types = new String[entryTypes.length];
+	private final String name;
+	private EntryType(String s) {
+		name = s;
+	}
 
-		for (int i = 0; i < entryTypes.length; i++) {
-			types[i] = entryTypes[i].name();
-		}
-
-		return types;
+	public String toString() {
+		return this.name;
 	}
 	
 }

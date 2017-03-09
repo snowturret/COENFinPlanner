@@ -4,7 +4,6 @@ package middleTier;
  * Created by raoyinchen on 3/5/17.
  */
 import javax.swing.*;
-import java.util.ArrayList;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -14,7 +13,7 @@ import java.awt.event.*;
 public class MainScreen extends JFrame {
     JButton spending, income, tracking;
     private SpendBoard toSpend;
-    private incomeBoard toIncome;
+    private IncomeBoard toIncome;
     private TrackBoard toTrack;
 
     //Constructor
@@ -57,7 +56,7 @@ public class MainScreen extends JFrame {
         income.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 //                System.out.print("income");
-                toIncome = new incomeBoard();
+                toIncome = new IncomeBoard();
                 dispose();
             }
         });
