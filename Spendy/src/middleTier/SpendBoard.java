@@ -7,14 +7,13 @@ import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.Vector;
 
 /**
  * Created by raoyinchen on 3/5/17.
  */
 public class SpendBoard extends JFrame {
     private JFormattedTextField activityDateInput;
-//    private JTextField activityDateInput;
     private JTextField activityMoneyInput;
     private JTextField activityTypeInput;
     private JTextField activityCommentInput;
@@ -22,13 +21,7 @@ public class SpendBoard extends JFrame {
     private JLabel activityMoney;
     private JLabel activityType;
     private JLabel activityComment;
-//    private JMenuBar allTypesBar;
-//    private JMenu allTypes;
-//    private JMenuItem food;
-//    private JMenuItem entertainment;
-//    private JMenuItem income;
     Container container = getContentPane();
-    HashMap<String,String> saveItems = new HashMap<>();
     MainScreen backToMain;
 
     public SpendBoard(){
@@ -60,7 +53,8 @@ public class SpendBoard extends JFrame {
         activityComment = new JLabel("Comment");
 
         final JComboBox<EntryType> comboBox = new JComboBox<>();
-        comboBox.setModel(new DefaultComboBoxModel<>(EntryType.values()));
+
+        comboBox.setModel(new DefaultComboBoxModel<>((Vector<EntryType>) EntryType.getboxes()));
 
         date.add(activityDate);
         cs.gridx = 0;
@@ -70,8 +64,8 @@ public class SpendBoard extends JFrame {
         panel.add(date, cs);
 
         date.add(activityDateInput);
-        cs.gridx = 1;
-        cs.gridy = 0;
+        cs.gridx = 0;
+        cs.gridy = 1;
         cs.gridwidth = 1;
 
         panel.add(date, cs);
@@ -79,13 +73,13 @@ public class SpendBoard extends JFrame {
 
         money.add(activityMoney);
         cs.gridx = 0;
-        cs.gridy = 1;
+        cs.gridy = 2;
         cs.gridwidth = 1;
 
         panel.add(money, cs);
         money.add(activityMoneyInput);
-        cs.gridx = 1;
-        cs.gridy = 1;
+        cs.gridx = 0;
+        cs.gridy = 3;
         cs.gridwidth = 1;
 
         panel.add(money, cs);
@@ -98,23 +92,22 @@ public class SpendBoard extends JFrame {
         panel.add(comment, cs);
         comment.add(activityCommentInput);
 
-        cs.gridx = 2;
-        cs.gridy = 1;
+        cs.gridx = 1;
+        cs.gridy = 3;
         cs.gridwidth = 1;
 
         panel.add(comment, cs);
 
         type.add(activityType);
-        cs.gridx = 2;
+        cs.gridx = 1;
         cs.gridy = 0;
         cs.gridwidth = 1;
-
         panel.add(type, cs);
 
         type.add(comboBox);
         comboBox.setVisible(true);
-        cs.gridx = 2;
-        cs.gridy = 0;
+        cs.gridx = 1;
+        cs.gridy = 1;
         cs.gridwidth = 1;
 
         panel.add(type, cs);
@@ -125,17 +118,33 @@ public class SpendBoard extends JFrame {
         inputButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                Date date = (Date)activityDateInput.getValue();
-                EntryType type = (EntryType) comboBox.getSelectedItem();
-                Float value = Float.valueOf(activityMoneyInput.getText());
-                String description = activityCommentInput.getText();
+                try{
+                    Float.valueOf(activityMoneyInput.getText());
+                }catch(NumberFormatException numberFormatException) {
+                    JOptionPane.showMessageDialog(SpendBoard.this,
+                            "Please enter a valid amount",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
 
-                Spendy.createNewEntry(date,type,value,description);
+                if(activityDateInput.getText() == null || activityDateInput.getText().length() == 0 || !activityDateInput.isEditValid()) {
+                    JOptionPane.showMessageDialog(SpendBoard.this,
+                            "Please enter a valid date",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }else {
+                    Date date = (Date)activityDateInput.getValue();
+                    EntryType type = (EntryType) comboBox.getSelectedItem();
+                    Float value = Float.valueOf(activityMoneyInput.getText());
+                    String description = activityCommentInput.getText();
+                    Spendy.createNewEntry(date,type,value,description);
 
-                JOptionPane.showMessageDialog(SpendBoard.this,
-                         "You have successfully saved the items.",
-                        "Login",
-                        JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(SpendBoard.this,
+                            "You have successfully saved the items.",
+                            "Success",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         });
 

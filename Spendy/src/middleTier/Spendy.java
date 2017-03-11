@@ -32,10 +32,9 @@ public class Spendy {
             if(user.getName().equals(name) && user.getPassword().equals(password)) {
                 currentUser = user;
                 return true;
-            } else {
-                currentUser = null;
             }
         }
+        currentUser = null;
         return false;
     }
 
@@ -61,7 +60,7 @@ public class Spendy {
         currentUser.getEntries().add(new Entry (entryDate,category,value,description));
     }
 
-    //file format should be date --> MM/dd/yyyy, category, value and description
+    //file format should be in order -->  date(MM/dd/yyyy), category, value and description
     public static void importFile(String FILE_PATH) throws FileNotFoundException {
         Scanner scan = new Scanner(new File(FILE_PATH));
         while (scan.hasNextLine()) {
@@ -89,7 +88,7 @@ public class Spendy {
 
     public static ArrayList<Entry> trackingResults(Date startDate, Date endDate,EntryType category){
         ArrayList<Entry> results = new ArrayList<>();
-        if (category == null) {
+        if (category == EntryType.ALL) {
             if (startDate == null && endDate == null) {
                 return currentUser.getEntries();
             } else {
