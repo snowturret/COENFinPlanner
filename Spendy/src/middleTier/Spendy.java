@@ -2,6 +2,9 @@ package middleTier;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,7 +32,7 @@ public class Spendy {
 
     public static boolean login(String name, String password) {
         for(User user : users) {
-            if(user.getName().equals(name) && user.getPassword().equals(password)) {
+            if(user.getName().equals(name) && md5(user.getPassword()).equals(md5(password))) {
                 currentUser = user;
                 return true;
             } else {
@@ -40,11 +43,25 @@ public class Spendy {
     }
 
     public static void register(String name, String password) {
-        User u = new User(name, password);
+        String md5Password = md5(password);
+        User u = new User(name, md5Password);
         users.add(u);
         currentUser = u ;
     }
-
+    
+    public static String md5(String input) {
+      String md5 = null;
+      if(null == input) return null;
+      try {
+          MessageDigest digest = MessageDigest.getInstance("MD5");
+          digest.update(input.getBytes(), 0, input.length());
+          md5 = new BigInteger(1, digest.digest()).toString(16);
+      } catch (NoSuchAlgorithmException e) {
+          e.printStackTrace();
+      }
+      return md5;
+  }
+    
     public static User getCurrentUser() {
         return currentUser;
     }

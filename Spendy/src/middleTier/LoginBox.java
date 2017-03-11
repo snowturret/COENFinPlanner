@@ -137,7 +137,7 @@ public class LoginBox extends JFrame {
         setResizable(false);
         setLocationRelativeTo(parent);
     }
-
+    
     public String getUsername() {
         return tfUsername.getText().trim();
     }
@@ -145,7 +145,7 @@ public class LoginBox extends JFrame {
 
     //md5 password
     public String getPassword() {
-        return md5(new String(pfPassword.getPassword()));
+        return new String(pfPassword.getPassword());
     }
 
     public String md5(String input) {
@@ -160,7 +160,7 @@ public class LoginBox extends JFrame {
         }
         return md5;
     }
-
+       
     public boolean isSucceeded() {
         return succeeded;
     }
