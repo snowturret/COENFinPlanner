@@ -6,13 +6,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 /**
  * Created by raoyinchen on 3/5/17.
  */
 public class IncomeBoard extends JFrame {
-    private JTextField activityDateInput;
+    private JFormattedTextField activityDateInput;
+//    private JTextField activityDateInput;
     private JTextField activityMoneyInput;
     private JTextField activityTypeInput;
     private JTextField activityCommentInput;
@@ -47,7 +51,9 @@ public class IncomeBoard extends JFrame {
         type.setLayout(new BoxLayout(type, BoxLayout.Y_AXIS));
         comment.setLayout(new BoxLayout(comment, BoxLayout.Y_AXIS));
 
-        activityDateInput = new JTextField(10);
+//        activityDateInput = new JTextField(10);
+        DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        activityDateInput = new JFormattedTextField(format);
         activityMoneyInput = new JTextField(20);
         activityTypeInput = new JTextField(20);
         activityCommentInput = new JTextField(20);
@@ -99,22 +105,20 @@ public class IncomeBoard extends JFrame {
 
         panel.add(comment, cs);
 
-
-
-        allTypesBar = new JMenuBar();
-        allTypes = new JMenu("types");
-        food = new JMenuItem("food");
-        entertainment = new JMenuItem("entertainment");
-//        left.add(date);
-//        left.add(type);
-//        right.add(money);
-//        right.add(comment);
-//
-//        container.add(left);
-//        container.add(right);
-        allTypes.add(food);
-        allTypes.add(entertainment);
-        allTypesBar.add(allTypes);
+//        allTypesBar = new JMenuBar();
+//        allTypes = new JMenu("types");
+//        food = new JMenuItem("food");
+//        entertainment = new JMenuItem("entertainment");
+////        left.add(date);
+////        left.add(type);
+////        right.add(money);
+////        right.add(comment);
+////
+////        container.add(left);
+////        container.add(right);
+//        allTypes.add(food);
+//        allTypes.add(entertainment);
+//        allTypesBar.add(allTypes);
 
 
         container.add(panel,BorderLayout.CENTER);
@@ -123,15 +127,43 @@ public class IncomeBoard extends JFrame {
         inputButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                saveItems.put(activityDate.getText(),activityDateInput.getText());
-                saveItems.put(activityComment.getText(),activityCommentInput.getText());
-                saveItems.put(activityMoney.getText(),activityMoneyInput.getText());
+                try{
+                    Float.valueOf(activityMoneyInput.getText());
+                }catch(NumberFormatException numberFormatException) {
+                    JOptionPane.showMessageDialog(IncomeBoard.this,
+                            "Please enter a valid amount",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
 
-                JOptionPane.showMessageDialog(IncomeBoard.this,
-                        "You have successfully saved the items.",
-                        "Login",
-                        JOptionPane.INFORMATION_MESSAGE);
-                getSpendInfo();
+                if(activityDateInput.getText() == null || activityDateInput.getText().length() == 0 || !activityDateInput.isEditValid()) {
+                    JOptionPane.showMessageDialog(IncomeBoard.this,
+                            "Please enter a valid date",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }else {
+                    Date date = (Date)activityDateInput.getValue();
+                    Float value = Float.valueOf(activityMoneyInput.getText());
+                    String description = activityCommentInput.getText();
+
+                    Spendy.createNewEntry(date,EntryType.INCOME,value,description);
+
+                    JOptionPane.showMessageDialog(IncomeBoard.this,
+                            "You have successfully saved the items.",
+                            "Success",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
+
+//                saveItems.put(activityDate.getText(),activityDateInput.getText());
+//                saveItems.put(activityComment.getText(),activityCommentInput.getText());
+//                saveItems.put(activityMoney.getText(),activityMoneyInput.getText());
+//
+//                JOptionPane.showMessageDialog(IncomeBoard.this,
+//                        "You have successfully saved the items.",
+//                        "Login",
+//                        JOptionPane.INFORMATION_MESSAGE);
+//                getSpendInfo();
             }
         });
 
@@ -153,13 +185,13 @@ public class IncomeBoard extends JFrame {
         setVisible(true);
     }
 
-    public HashMap<String, String> getSpendInfo() {
-        for(String head : saveItems.keySet()) {
-            System.out.println(head + ": " + saveItems.get(head));
-        }
-        return saveItems;
-
-    }
+//    public HashMap<String, String> getSpendInfo() {
+//        for(String head : saveItems.keySet()) {
+//            System.out.println(head + ": " + saveItems.get(head));
+//        }
+//        return saveItems;
+//
+//    }
 
 //    public static void main(String[] args) {
 //        IncomeBoard income = new IncomeBoard();

@@ -28,7 +28,7 @@ public class MainScreen extends JFrame {
 
         JLabel greeting = new JLabel("Hi " + Spendy.getCurrentUser().getName() + "!");
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 2;
+        c.gridx = 1;
         c.gridy = 0;
         c.gridwidth = 3;
         pane.add(greeting, c);
@@ -36,7 +36,7 @@ public class MainScreen extends JFrame {
         spending = new JButton("Add Spending");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
-        c.gridy = 1;
+        c.gridy = 2;
         c.gridwidth = 3;
         pane.add(spending, c);
 
@@ -49,7 +49,7 @@ public class MainScreen extends JFrame {
         });
         income = new JButton("Add income");
         c.gridx = 0;
-        c.gridy = 2;
+        c.gridy = 3;
         c.gridwidth = 3;
         pane.add(income, c);
 
@@ -64,7 +64,7 @@ public class MainScreen extends JFrame {
         tracking = new JButton("Tracking");
         c.gridwidth = 3;
         c.gridx = 0;
-        c.gridy = 3;
+        c.gridy = 4;
         pane.add(tracking, c);
 
         tracking.addActionListener(new ActionListener() {

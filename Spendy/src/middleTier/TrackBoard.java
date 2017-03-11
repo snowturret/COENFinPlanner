@@ -1,5 +1,7 @@
 package middleTier;
 
+import org.jfree.chart.ChartPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,8 +18,6 @@ import java.util.HashMap;
 public class TrackBoard extends JFrame {
     private JFormattedTextField activityStartDateInput;
     private JFormattedTextField activityEndDateInput;
-//    private JTextField activityStartDateInput;
-//    private JTextField activityEndDateInput;
     private JTextField activityTypeInput;
     private JTextField activityTableInput;
     private JLabel activityStartDate;
@@ -29,6 +29,9 @@ public class TrackBoard extends JFrame {
     private JMenuItem food;
     private JMenuItem entertainment;
     private JMenuItem income;
+    public static String displayType = "All";
+    public static String displayGraph = "x-y";
+
     Container container = getContentPane();
     HashMap<String,String> saveItems = new HashMap<>();
     MainScreen backToMain;
@@ -53,8 +56,6 @@ public class TrackBoard extends JFrame {
         DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
         activityStartDateInput = new JFormattedTextField(format);
         activityEndDateInput = new JFormattedTextField(format);
-//        activityStartDateInput = new JTextField(10);
-//        activityEndDateInput = new JTextField(20);
         activityTypeInput = new JTextField(20);
         activityTableInput = new JTextField(20);
         activityStartDate = new JLabel("Start Date('dd/mm/yyyy')");
@@ -65,8 +66,7 @@ public class TrackBoard extends JFrame {
         final JComboBox<EntryType> comboBox = new JComboBox<>();
         comboBox.setModel(new DefaultComboBoxModel<>(EntryType.values()));
 
-        String[] tableChoices = { "chart","graph", "x-y"};
-
+        String[] tableChoices = { "x-y","bar-chart"};//type of charts
         final JComboBox<String> tc = new JComboBox<String>(tableChoices);
 
         date.add(activityStartDate);
@@ -82,7 +82,6 @@ public class TrackBoard extends JFrame {
         cs.gridwidth = 1;
 
         panel.add(date, cs);
-
 
         money.add(activityEndDate);
         cs.gridx = 2;
@@ -117,15 +116,12 @@ public class TrackBoard extends JFrame {
 
         panel.add(comment, cs);
 
-
-
         type.add(activityType);
         cs.gridx = 0;
         cs.gridy = 1;
         cs.gridwidth = 1;
 
         panel.add(type, cs);
-
 
         type.add(comboBox);
         comboBox.setVisible(true);
@@ -140,7 +136,7 @@ public class TrackBoard extends JFrame {
         allTypes = new JMenu("types");
         food = new JMenuItem("food");
         entertainment = new JMenuItem("entertainment");
-//
+
         allTypes.add(food);
         allTypes.add(entertainment);
         allTypesBar.add(allTypes);
@@ -158,19 +154,29 @@ public class TrackBoard extends JFrame {
                 String graph = String.valueOf(tc.getSelectedItem());
 
                 ArrayList<Entry> results = Spendy.trackingResults(startDate,endDate,type);
-                //pass results to generate graph
-
-
-//                saveItems.put(activityStartDate.getText(),activityStartDateInput.getText());
-//                saveItems.put(activityTable.getText(),String.valueOf(tc.getSelectedItem()));
-//                saveItems.put(activityEndDate.getText(),activityEndDateInput.getText());
-//                saveItems.put(activityType.getText(),String.valueOf(cb.getSelectedItem()));
 
                 JOptionPane.showMessageDialog(TrackBoard.this,
                         "Graph generated!",
                         "Login",
                         JOptionPane.INFORMATION_MESSAGE);
-                getSpendInfo();
+//                displayType = String.valueOf(type);
+                displayGraph = String.valueOf(tc.getSelectedItem());
+                ChartPanel chart;
+                if(displayGraph.equals("x-y")) {
+                    chart = (ChartPanel)XYGenerator.createChartPanel(results, type);
+                } else  {
+                    chart = (ChartPanel)HistogramGenerator.generateBarChart(results, type);
+                };
+
+                JPanel chartPanel = new JPanel();
+                chartPanel.add(chart);
+                chartPanel.validate();
+                container.add(chartPanel,BorderLayout.AFTER_LINE_ENDS);
+                setDefaultCloseOperation(EXIT_ON_CLOSE);
+                pack();
+                setResizable(false);
+                setVisible(true);
+//                getTrackInfo();
             }
         });
 
@@ -191,17 +197,19 @@ public class TrackBoard extends JFrame {
         setResizable(false);
         setVisible(true);
     }
-    public HashMap<String, String> getSpendInfo() {
-        for(String head : saveItems.keySet()) {
-            System.out.println(head + ": " + saveItems.get(head));
-        }
-        return saveItems;
 
-    }
+//    public HashMap<String, String> getTrackInfo() {//where we can get/see the how we want to track: cgart type, time frame, etc
+//        for(String head : saveItems.keySet()) {
+//            System.out.println(head + ": " + saveItems.get(head));
+//        }
+//        return saveItems;
+//
+//    }
+//    public String getDisplayType() {
+//        return displayType;
+//    }
 
-
-    public static void main(String[] args) {
-        TrackBoard track = new TrackBoard();
-
-    }
+//    public static void main(String[] args) {
+//        TrackBoard track = new TrackBoard();
+//    }
 }

@@ -1,10 +1,13 @@
 package middleTier;
 
+import java.util.Vector;
+
 public enum EntryType {
-	INCOME ("income"),
-	ENTERTAINMENT("entertainment"),
+	ALL("all"),
 	BILLS("bills"),
-	FOOD("food");	// catch-all for required food/drink
+	ENTERTAINMENT("entertainment"),
+	FOOD("food"),
+	INCOME ("income");// catch-all for required food/drink
 
 	private final String name;
 	private EntryType(String s) {
@@ -14,7 +17,17 @@ public enum EntryType {
 	public String toString() {
 		return this.name;
 	}
-	
+
+	public static Vector<EntryType> getboxes() {
+		Vector<EntryType> vector = new Vector<>();
+		for (EntryType type : EntryType.values()) {
+			if (type != INCOME && type != ALL) {
+				vector.add(type);
+			}
+		}
+		return vector;
+
+	}
 }
 
 
