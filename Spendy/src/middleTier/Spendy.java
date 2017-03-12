@@ -45,31 +45,10 @@ public class Spendy {
     public static void register(String name, String password) {
         User u = new User(name, password);
         users.add(u);
-        StoreUser.storeUser(USER_AUTH_PATH, u);
         currentUser = u;
-    }
+        StoreUser.storeUser(USER_AUTH_PATH, u);
 
-    // public static void storeUser(String filepath, String userAuth) {
-    //
-    // File file = new File(filepath);
-    // FileWriter fw = null;
-    // try {
-    // // Below constructor argument decides whether to append or override
-    // fw = new FileWriter(file, true);
-    //
-    // fw.write(userAuth);
-    // } catch (IOException e) {
-    // e.printStackTrace();
-    // } finally {
-    // try {
-    // fw.close();
-    // } catch (IOException e) {
-    // e.printStackTrace();
-    // }
-    // }
-    // }
-    //
-    // }
+    }
 
     public static String md5(String input) {
         String md5 = null;
@@ -90,7 +69,7 @@ public class Spendy {
     }
 
     public void cleanCurrentUser() {
-        this.currentUser = null;
+        currentUser = null;
     }
 
     public void logout() {

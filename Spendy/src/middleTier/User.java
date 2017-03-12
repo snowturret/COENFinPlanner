@@ -15,12 +15,12 @@ public class User {
 
     public User(String name, String password) {
         this.name = name;
-        this.password = password;
+        this.password = Spendy.md5(password);
         this.entries = new ArrayList<>();
     }
 
     public boolean validation(String password) {
-        if (this.password.equals(password)) {
+        if (this.password.equals(Spendy.md5(password))) {
             return true;
         }
         return false;
