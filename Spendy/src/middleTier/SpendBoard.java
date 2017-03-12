@@ -144,6 +144,7 @@ public class SpendBoard extends JFrame {
                             "You have successfully saved the items.",
                             "Success",
                             JOptionPane.INFORMATION_MESSAGE);
+                    dispose();
                 }
             }
         });
