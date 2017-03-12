@@ -150,6 +150,7 @@ public class IncomeBoard extends JFrame {
         pack();
         setResizable(false);
         setVisible(true);
+        setLocationRelativeTo(null);
     }
 
 }

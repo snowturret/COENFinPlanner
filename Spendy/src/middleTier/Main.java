@@ -31,6 +31,7 @@ public class Main {
         board.setSize(300, 100);
         board.setLayout(new FlowLayout());
         board.getContentPane().add(btnLogin);
+        board.setLocationRelativeTo(null);
         board.setVisible(true);
     }
 }
