@@ -91,6 +91,7 @@ public class MainScreen extends JFrame {
         //Display the window.
         frame.pack();
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
     }
 
 }

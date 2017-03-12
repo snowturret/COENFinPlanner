@@ -24,7 +24,6 @@ public class HistogramGenerator extends ApplicationFrame
     public HistogramGenerator( String applicationTitle)
     {
         super( applicationTitle );
-//        generateBarChart(entris,type);
     }
 
     public static ChartPanel generateBarChart(ArrayList<Entry> entries, EntryType type) {
@@ -65,16 +64,6 @@ public class HistogramGenerator extends ApplicationFrame
             }
             return dataset;
         }
-
     }
-
-
-//    public static void main( String[ ] args )
-//    {
-//        HistogramGenerator chart = new HistogramGenerator("Money Usage Statistics");
-//        chart.pack( );
-//        RefineryUtilities.centerFrameOnScreen(chart);
-//        chart.setVisible( true );
-//    }
 
 }

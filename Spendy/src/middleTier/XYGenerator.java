@@ -17,6 +17,8 @@ import org.jfree.data.xy.XYDataset;
 import javax.swing.*;
 import java.util.ArrayList;
 
+import static oracle.jrockit.jfr.events.Bits.floatValue;
+
 public class XYGenerator extends JFrame {
 
     public XYGenerator() {
@@ -29,8 +31,8 @@ public class XYGenerator extends JFrame {
 
     public static JPanel createChartPanel(ArrayList<Entry> entries, EntryType type) {
         String chartTitle = "Objects Movement Chart";
-        String xAxisLabel = "X";
-        String yAxisLabel = "Y";
+        String xAxisLabel = "Category";
+        String yAxisLabel = "Spent";
 
         XYDataset dataset = createDataset(entries,type);
         JFreeChart chart = ChartFactory.createTimeSeriesChart(chartTitle, xAxisLabel, yAxisLabel, dataset,true,true,false);
@@ -45,8 +47,10 @@ public class XYGenerator extends JFrame {
 
         if (type != EntryType.ALL) {
             for(int i = 0; i < entries.size(); i++) {
-                trackingEntries.add(new Day(entries.get(i).getEntryDate()),entries.get(i).getValue());
+                Day day = new Day(entries.get(i).getEntryDate());
+                trackingEntries.addOrUpdate(day, floatValue(trackingEntries.getValue(day)) + entries.get(i).getValue());
             }
+
             dataset.addSeries(trackingEntries);
             return dataset;
         } else {
@@ -55,7 +59,8 @@ public class XYGenerator extends JFrame {
                     TimeSeries ts = new TimeSeries(et.toString(), Day.class);
                     for(Entry entry : entries) {
                         if (entry.getCategory() == et) {
-                            ts.add(new Day(entry.getEntryDate()),entry.getValue());
+                            Day day = new Day(entry.getEntryDate());
+                            ts.addOrUpdate(day,floatValue(ts.getValue(day)) + entry.getValue());
                         }
                     }
                     dataset.addSeries(ts);
@@ -65,13 +70,13 @@ public class XYGenerator extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new XYGenerator().setVisible(true);
-            }
-        });
-
-    }
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                new XYGenerator().setVisible(true);
+//            }
+//        });
+//
+//    }
 }

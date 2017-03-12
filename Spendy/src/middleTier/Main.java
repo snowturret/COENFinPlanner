@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 public class Main {
     public static void main(String[] args) {
-        Spendy s = new Spendy();
+//        Spendy s = new Spendy();
 
         final JFrame board = new JFrame("Financial Recommendar");
         final JButton btnLogin = new JButton("Click to login");
@@ -31,6 +31,7 @@ public class Main {
         board.setSize(300, 100);
         board.setLayout(new FlowLayout());
         board.getContentPane().add(btnLogin);
+        board.setLocationRelativeTo(null);
         board.setVisible(true);
     }
 }

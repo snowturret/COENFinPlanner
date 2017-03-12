@@ -1,7 +1,6 @@
 package middleTier;
 
 import org.jfree.chart.ChartPanel;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,7 +9,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 /**
  * Created by raoyinchen on 3/5/17.
@@ -24,22 +22,16 @@ public class TrackBoard extends JFrame {
     private JLabel activityEndDate;
     private JLabel activityType;
     private JLabel activityTable;
-    private JMenuBar allTypesBar;
-    private JMenu allTypes;
-    private JMenuItem food;
-    private JMenuItem entertainment;
-    private JMenuItem income;
-    public static String displayType = "All";
+    private JPanel chartPanel;
     public static String displayGraph = "x-y";
-
     Container container = getContentPane();
-    HashMap<String,String> saveItems = new HashMap<>();
     MainScreen backToMain;
 
     public TrackBoard(){
 
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints cs = new GridBagConstraints();
+        chartPanel = new JPanel();
 
         cs.fill = GridBagConstraints.HORIZONTAL;
 
@@ -131,17 +123,6 @@ public class TrackBoard extends JFrame {
 
         panel.add(type, cs);
 
-
-        allTypesBar = new JMenuBar();
-        allTypes = new JMenu("types");
-        food = new JMenuItem("food");
-        entertainment = new JMenuItem("entertainment");
-
-        allTypes.add(food);
-        allTypes.add(entertainment);
-        allTypesBar.add(allTypes);
-
-
         container.add(panel,BorderLayout.CENTER);
         JButton inputButton = new JButton("done & input");
 
@@ -159,24 +140,23 @@ public class TrackBoard extends JFrame {
                         "Graph generated!",
                         "Login",
                         JOptionPane.INFORMATION_MESSAGE);
-//                displayType = String.valueOf(type);
                 displayGraph = String.valueOf(tc.getSelectedItem());
+
                 ChartPanel chart;
                 if(displayGraph.equals("x-y")) {
                     chart = (ChartPanel)XYGenerator.createChartPanel(results, type);
                 } else  {
-                    chart = (ChartPanel)HistogramGenerator.generateBarChart(results, type);
+                    chart = HistogramGenerator.generateBarChart(results, type);
                 };
-
-                JPanel chartPanel = new JPanel();
+                chartPanel.removeAll();
                 chartPanel.add(chart);
-                chartPanel.validate();
-                container.add(chartPanel,BorderLayout.AFTER_LINE_ENDS);
+                chartPanel.revalidate();
+                chartPanel.repaint();
+                container.add(chartPanel, BorderLayout.AFTER_LINE_ENDS);
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
                 pack();
                 setResizable(false);
                 setVisible(true);
-//                getTrackInfo();
             }
         });
 
@@ -196,6 +176,7 @@ public class TrackBoard extends JFrame {
         pack();
         setResizable(false);
         setVisible(true);
+        setLocationRelativeTo(null);
     }
 
 //    public HashMap<String, String> getTrackInfo() {//where we can get/see the how we want to track: cgart type, time frame, etc
