@@ -165,6 +165,7 @@ public class SpendBoard extends JFrame {
         pack();
         setResizable(false);
         setVisible(true);
+        setLocationRelativeTo(null);
     }
 
 }
