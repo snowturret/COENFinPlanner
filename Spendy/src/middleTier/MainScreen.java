@@ -93,8 +93,7 @@ public class MainScreen extends JFrame {
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
-
-        try {
+		try {
             Spendy.saveFile();
             System.out.println ("save in main screen");
         }catch (IOException io){
