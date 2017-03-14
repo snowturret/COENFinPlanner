@@ -1,7 +1,6 @@
 package middleTier;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,15 +15,9 @@ public class Spendy {
 
     private static ArrayList<User> users = new ArrayList<>();
     private static User currentUser;
+    private static final String FILE_PATH = "DB.txt";
 
     public Spendy(){
-//        try {
-//            importFile("src/test.csv");
-//        }catch (FileNotFoundException ex) {
-//            System.out.println("something wrong with file");
-//        } finally {
-//
-//        }
     }
 
     public static boolean login(String name, String password) {
@@ -144,4 +137,84 @@ public class Spendy {
         }
         return results;
     }
+
+    public static void saveFile ()throws IOException {
+        File fout = new File("DB.txt");
+        FileOutputStream fos = new FileOutputStream(fout);
+
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+        for(User user : users) {
+            if (user.getEntries().size()== 0 || user.getEntries() == null) {
+                bw.write(user.getName() + "," + user.getPassword());
+                System.out.println("no entries");
+                bw.newLine();
+                continue;
+            }
+            for(int i = 0; i < user.getEntries().size(); i++) {
+                bw.write(user.getName() + "," + user.getPassword() + "," + user.getEntries().get(i).getEntryDate().toString()
+                        + "," + user.getEntries().get(i).getCategory().toString() + "," + String.valueOf(user.getEntries().get(i).getValue()) + "," +
+                        user.getEntries().get(i).getDescription());
+                System.out.println(user.getName() + "," + user.getPassword() + "," + user.getEntries().get(i).getEntryDate().toString()
+                        + "," + user.getEntries().get(i).getCategory().toString() + "," + String.valueOf(user.getEntries().get(i).getValue()) + "," +
+                        user.getEntries().get(i).getDescription());
+                bw.newLine();
+            }
+        }
+        bw.close();
+        System.out.println("Success");
+    }
+    public static boolean duplicateUser(String name, String password) {
+        for (User user : users) {
+            if (user.getName().equals(name) && user.getPassword().equals(password)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public static void readFile (String FILE_PATH)throws FileNotFoundException {
+        Scanner scan = new Scanner(new File(FILE_PATH));
+        User current = null;
+        while (scan.hasNextLine()) {
+            String line = scan.nextLine().trim();
+            if (line.length() == 0 || line == null) {
+                break;
+            }
+            String[] lineArray = line.split(",");
+
+            if (!duplicateUser(lineArray[0], lineArray[1])) {
+                current = new User(lineArray[0], lineArray[1]);
+                users.add(current);
+            }
+            if (lineArray.length <= 2) {
+                break;
+            } else {
+                String dateStr =lineArray[2] ;
+                DateFormat readFormat = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
+                Date startDate = null;
+                try {
+                    startDate = readFormat.parse( dateStr );
+                    EntryType type = null;
+                    for (EntryType e : EntryType.values()) {
+                        if (lineArray[3].equals(e.toString())) {
+                            type = e;
+                            break;
+                        }
+                    }
+                    float value = Float.valueOf(lineArray[4]);
+                    if (lineArray.length == 5) {
+                        current.getEntries().add(new Entry(startDate, type, value, null));
+                    } else {
+                        current.getEntries().add(new Entry(startDate, type, value, lineArray[5]));
+                    }
+                } catch ( ParseException e ) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+
 }

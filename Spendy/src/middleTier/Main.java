@@ -2,13 +2,27 @@ package middleTier;
 /**
  * Created by raoyinchen on 3/5/17.
  */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
+        AutoSlide i1 = new AutoSlide();
+        final String FILE_PATH = "DB.txt";
+        try {
+//            importFile("src/test.csv");
+            Spendy.readFile(FILE_PATH);
+            System.out.println("read file done");
+
+        }catch (FileNotFoundException ex) {
+//            System.out.println("something wrong with file");
+            System.out.println("something wrong read file");
+        }
 //        Spendy s = new Spendy();
 
         final JFrame board = new JFrame("Financial Recommendar");
@@ -28,9 +42,19 @@ public class Main {
                 });
 
         board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        board.setSize(300, 100);
+        board.setSize(1000, 1000);
         board.setLayout(new FlowLayout());
         board.getContentPane().add(btnLogin);
         board.setVisible(true);
+        board.setLocationRelativeTo(null);
+        board.add(i1);
+
+        try {
+            Spendy.saveFile();
+            System.out.println ("save in main");
+        }catch (IOException io){
+            System.out.println ("Error in saving file");
+        }
+
     }
 }

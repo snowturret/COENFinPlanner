@@ -1,6 +1,7 @@
 package middleTier;
 
 import org.jfree.chart.ChartPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -157,6 +158,7 @@ public class TrackBoard extends JFrame {
                 pack();
                 setResizable(false);
                 setVisible(true);
+                setLocationRelativeTo(null);
             }
         });
 
@@ -176,20 +178,13 @@ public class TrackBoard extends JFrame {
         pack();
         setResizable(false);
         setVisible(true);
-    }
+        setLocationRelativeTo(null);
 
-//    public HashMap<String, String> getTrackInfo() {//where we can get/see the how we want to track: cgart type, time frame, etc
-//        for(String head : saveItems.keySet()) {
-//            System.out.println(head + ": " + saveItems.get(head));
+//        try {
+//            Spendy.saveFile();
+//        }catch (IOException io){
+//            System.out.println ("Error in saving file2");
 //        }
-//        return saveItems;
-//
-//    }
-//    public String getDisplayType() {
-//        return displayType;
-//    }
-
-//    public static void main(String[] args) {
-//        TrackBoard track = new TrackBoard();
-//    }
+    }
+    
 }

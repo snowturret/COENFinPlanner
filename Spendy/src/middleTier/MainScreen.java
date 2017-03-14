@@ -6,6 +6,7 @@ package middleTier;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 /**
  * Created by guoyiruan on 3/5/17.
@@ -91,6 +92,14 @@ public class MainScreen extends JFrame {
         //Display the window.
         frame.pack();
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
+
+        try {
+            Spendy.saveFile();
+            System.out.println ("save in main screen");
+        }catch (IOException io){
+            System.out.println ("Error in saving file1");
+        }
     }
 
 }

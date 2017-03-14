@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 
 /**
  * Created by raoyinchen on 3/5/17.
@@ -24,7 +23,7 @@ public class IncomeBoard extends JFrame {
     private JLabel activityType;
     private JLabel activityComment;
     Container container = getContentPane();
-    HashMap<String,String> saveItems = new HashMap<>();
+//    HashMap<String,String> saveItems = new HashMap<>();
     MainScreen backToMain;
 
     public IncomeBoard(){
@@ -139,6 +138,7 @@ public class IncomeBoard extends JFrame {
 
             public void actionPerformed(ActionEvent e) {
                 backToMain = new MainScreen();
+
                 dispose();
             }
         });
@@ -150,6 +150,7 @@ public class IncomeBoard extends JFrame {
         pack();
         setResizable(false);
         setVisible(true);
+        setLocationRelativeTo(null);
     }
 
 }
