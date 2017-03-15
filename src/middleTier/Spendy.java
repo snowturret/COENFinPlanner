@@ -41,11 +41,11 @@ public class Spendy {
         return currentUser;
     }
 
-    public void cleanCurrentUser() {
-        this.currentUser = null;
+    public static void cleanCurrentUser() {
+        currentUser = null;
     }
 
-    public void logout() {
+    public static void logout() {
         cleanCurrentUser();
     }
 
@@ -151,12 +151,18 @@ public class Spendy {
                 continue;
             }
             for(int i = 0; i < user.getEntries().size(); i++) {
-                bw.write(user.getName() + "," + user.getPassword() + "," + user.getEntries().get(i).getEntryDate().toString()
-                        + "," + user.getEntries().get(i).getCategory().toString() + "," + String.valueOf(user.getEntries().get(i).getValue()) + "," +
-                        user.getEntries().get(i).getDescription());
-                System.out.println(user.getName() + "," + user.getPassword() + "," + user.getEntries().get(i).getEntryDate().toString()
-                        + "," + user.getEntries().get(i).getCategory().toString() + "," + String.valueOf(user.getEntries().get(i).getValue()) + "," +
-                        user.getEntries().get(i).getDescription());
+                if (user.getEntries().get(i).getDescription() == null) {
+                    bw.write(user.getName() + "," + user.getPassword() + "," + user.getEntries().get(i).getEntryDate().toString()
+                            + "," + user.getEntries().get(i).getCategory().toString() + "," + String.valueOf(user.getEntries().get(i).getValue()));
+                }else {
+                    bw.write(user.getName() + "," + user.getPassword() + "," + user.getEntries().get(i).getEntryDate().toString()
+                            + "," + user.getEntries().get(i).getCategory().toString() + "," + String.valueOf(user.getEntries().get(i).getValue()) + "," +
+                            user.getEntries().get(i).getDescription());
+                }
+
+//                System.out.println(user.getName() + "," + user.getPassword() + "," + user.getEntries().get(i).getEntryDate().toString()
+//                        + "," + user.getEntries().get(i).getCategory().toString() + "," + String.valueOf(user.getEntries().get(i).getValue()) + "," +
+//                        user.getEntries().get(i).getDescription());
                 bw.newLine();
             }
         }

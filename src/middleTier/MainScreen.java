@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.text.ParseException;
 
 /**
  * Created by guoyiruan on 3/5/17.
@@ -99,6 +100,8 @@ public class MainScreen extends JFrame {
                     toRecommend = new RecommendBoard();
                 } catch (IOException e1) {
                     e1.printStackTrace();
+                } catch (ParseException e1) {
+                    e1.printStackTrace();
                 }
                 dispose();
             }
@@ -121,12 +124,6 @@ public class MainScreen extends JFrame {
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
-		try {
-            Spendy.saveFile();
-            System.out.println ("save in main screen");
-        }catch (IOException io){
-            System.out.println ("Error in saving file1");
-        }
     }
 
 }

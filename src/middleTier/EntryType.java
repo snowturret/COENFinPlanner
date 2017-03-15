@@ -6,8 +6,10 @@ public enum EntryType {
 	ALL("all"),
 	BILLS("bills"),
 	ENTERTAINMENT("entertainment"),
+	EDUCATION("education"),
 	FOOD("food"),
-	INCOME ("income");// catch-all for required food/drink
+	INCOME ("income"),
+	OTHER("other");// catch-all for required food/drink
 
 	private final String name;
 	private EntryType(String s) {

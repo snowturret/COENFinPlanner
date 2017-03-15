@@ -49,7 +49,7 @@ public class SpendBoard extends JFrame {
         activityTypeInput = new JTextField(20);
         activityCommentInput = new JTextField(20);
         activityDate = new JLabel("Date('dd/mm/yyyy')");
-        activityMoney = new JLabel("Money");
+        activityMoney = new JLabel("Money $");
         activityType = new JLabel("Type");
         activityComment = new JLabel("Comment");
 
@@ -140,6 +140,13 @@ public class SpendBoard extends JFrame {
                     Float value = Float.valueOf(activityMoneyInput.getText());
                     String description = activityCommentInput.getText();
                     Spendy.createNewEntry(date,type,value,description);
+
+                    try {
+                        Spendy.saveFile();
+//                        System.out.println ("save in spending entry");
+                    }catch (IOException io){
+                        System.out.println ("Error in saving file1");
+                    }
 
                     JOptionPane.showMessageDialog(SpendBoard.this,
                             "You have successfully saved the items.",

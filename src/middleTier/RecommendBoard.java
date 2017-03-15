@@ -1,10 +1,13 @@
 package middleTier;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -12,7 +15,7 @@ import java.util.Scanner;
  */
 public class RecommendBoard extends JFrame {
 
-    public RecommendBoard() throws IOException {
+    public RecommendBoard() throws IOException, ParseException {
 
         ArrayList<String> records = new ArrayList<>();
 
@@ -27,8 +30,17 @@ public class RecommendBoard extends JFrame {
             if (line.startsWith(Spendy.getCurrentUser().getName())) {
                 String[] subrecords = line.split(",");
                 StringBuilder subres = new StringBuilder();
-                for(int i = 2; i < subrecords.length;i++) {
-                   subres.append(subrecords[i]);
+
+                String start_dt = subrecords[2];
+                DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
+                Date date = (Date)formatter.parse(start_dt);
+                SimpleDateFormat newFormat = new SimpleDateFormat("yyyy/MM/dd");
+                String finalString = newFormat.format(date);
+                subres.append(finalString + " ");
+                for(int i = 3; i < subrecords.length;i++) {
+                    if (!subrecords[i].equals("null")) {
+                        subres.append(subrecords[i] + " ");
+                    }
                 }
                 records.add(subres.toString());
             }
@@ -39,9 +51,9 @@ public class RecommendBoard extends JFrame {
             showString.append(each + "\n");
         }
 
-        JTextArea textArea = new JTextArea("Here is your spending history  \n   " + showString.toString() +
+        JTextArea textArea = new JTextArea("Here is your spending history  \n\n" + showString.toString() +
 
-              "\nend of the recored");
+              "\nend of the record");
         textArea.setSize(700,700);
 
         textArea.setLineWrap(true);
@@ -61,11 +73,11 @@ public class RecommendBoard extends JFrame {
     }
 
 
-    public static void main(String[] args) throws IOException {
-
-        RecommendBoard show = new RecommendBoard();
-
-    }
+//    public static void main(String[] args) throws IOException {
+//
+////        RecommendBoard show = new RecommendBoard();
+//
+//    }
 }
 
 

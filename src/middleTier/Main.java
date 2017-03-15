@@ -17,7 +17,7 @@ public class Main {
         try {
 //            importFile("src/test.csv");
             Spendy.readFile(FILE_PATH);
-            System.out.println("read file done");
+//            System.out.println("read file done");
 
         }catch (FileNotFoundException ex) {
 //            System.out.println("something wrong with file");
@@ -57,7 +57,7 @@ public class Main {
 
         try {
             Spendy.saveFile();
-            System.out.println ("save in main");
+//            System.out.println ("save in main");
         }catch (IOException io){
             System.out.println ("Error in saving file");
         }

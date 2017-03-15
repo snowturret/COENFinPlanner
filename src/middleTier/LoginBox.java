@@ -2,14 +2,15 @@ package middleTier;
 /**
  * Created by raoyinchen on 3/5/17.
  */
+import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import javax.swing.*;
-import javax.swing.border.*;
 
 public class LoginBox extends JFrame {
 
@@ -65,6 +66,13 @@ public class LoginBox extends JFrame {
                 if(btnLogin.getText().equals("register") ) {
                     if((getUsername() != null && !getUsername().isEmpty() &&  getPassword() != null && !getPassword().isEmpty())) {
                         Spendy.register(getUsername(), getPassword());
+                        try {
+                            Spendy.saveFile();
+//                            System.out.println ("save register");
+                        }catch (IOException io){
+                            System.out.println ("Error in saving file1");
+                        }
+
                         JOptionPane.showMessageDialog(LoginBox.this,
                                 "Hi " + getUsername() + "! You have successfully registered.",
                                 "Login",

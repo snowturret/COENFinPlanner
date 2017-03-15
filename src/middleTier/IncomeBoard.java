@@ -50,7 +50,7 @@ public class IncomeBoard extends JFrame {
         activityTypeInput = new JTextField(20);
         activityCommentInput = new JTextField(20);
         activityDate = new JLabel("Date('dd/mm/yyyy')");
-        activityMoney = new JLabel("Money");
+        activityMoney = new JLabel("Money $");
         activityType = new JLabel("Type");
         activityComment = new JLabel("Comment");
 
@@ -124,6 +124,13 @@ public class IncomeBoard extends JFrame {
                     String description = activityCommentInput.getText();
 
                     Spendy.createNewEntry(date,EntryType.INCOME,value,description);
+
+                    try {
+                        Spendy.saveFile();
+//                        System.out.println ("save income entry");
+                    }catch (IOException io){
+                        System.out.println ("Error in saving file1");
+                    }
 
                     JOptionPane.showMessageDialog(IncomeBoard.this,
                             "You have successfully saved the items.",

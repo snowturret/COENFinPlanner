@@ -60,7 +60,7 @@ public class TrackBoard extends JFrame {
         final JComboBox<EntryType> comboBox = new JComboBox<>();
         comboBox.setModel(new DefaultComboBoxModel<>(EntryType.values()));
 
-        String[] tableChoices = { "x-y","bar-chart"};//type of charts
+        String[] tableChoices = { "x-y","bar-chart", "pie-chart"};//type of charts
         final JComboBox<String> tc = new JComboBox<String>(tableChoices);
 
         date.add(activityStartDate);
@@ -147,7 +147,9 @@ public class TrackBoard extends JFrame {
                 ChartPanel chart;
                 if(displayGraph.equals("x-y")) {
                     chart = (ChartPanel)XYGenerator.createChartPanel(results, type);
-                } else  {
+                } else if (displayGraph.equals("pie-chart"))   {
+                    chart = (ChartPanel)PieGenerator.createDemoPanel(results, type);
+                } else {
                     chart = HistogramGenerator.generateBarChart(results, type);
                 };
                 chartPanel.removeAll();
