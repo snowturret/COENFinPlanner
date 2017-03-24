@@ -3,29 +3,32 @@ Xi,202cb962ac59075b964b07152d234b70,Thu May 07 02:00:00 PDT 2015,bills,123.0,ele
 Xi,202cb962ac59075b964b07152d234b70,Sat May 07 02:00:00 PDT 2016,income,1000.0,money yay
 Xi,202cb962ac59075b964b07152d234b70,Tue Jul 07 02:00:00 PDT 2015,food,130.0,foodie
 Xi,202cb962ac59075b964b07152d234b70,Fri Jul 08 02:00:00 PDT 2016,bills,123.0,null
-Xi,202cb962ac59075b964b07152d234b70,Fri May 06 02:00:00 PDT 2016,entertainment,132.0,null
+Xi,202cb962ac59075b964b07152d234b70,Fri May 06 02:00:00 PDT 2016,shopping,132.0,null
 apple,1f3870be274f6c49b3e31a0c6728957f,Tue Mar 14 00:00:00 PDT 2017,bills,50.0,gas
 apple,1f3870be274f6c49b3e31a0c6728957f,Thu Mar 16 00:00:00 PDT 2017,bills,1000.0,rent
 apple,1f3870be274f6c49b3e31a0c6728957f,Sun Mar 12 00:00:00 PST 2017,income,2000.0,from work
 apple,1f3870be274f6c49b3e31a0c6728957f,Tue Feb 14 00:00:00 PST 2017,income,2000.0,work
 guoyi,8e32503b07f26b507a609f135521fca2,Fri Jan 06 00:00:00 PST 2017,food,30.0,grocery
 guoyi,8e32503b07f26b507a609f135521fca2,Mon Jan 09 00:00:00 PST 2017,bills,50.0,verizon
-guoyi,8e32503b07f26b507a609f135521fca2,Mon Jan 09 00:00:00 PST 2017,entertainment,30.0, movie
+guoyi,8e32503b07f26b507a609f135521fca2,Mon Jan 09 00:00:00 PST 2017,shopping,30.0, movie
 guoyi,8e32503b07f26b507a609f135521fca2,Tue Jan 10 00:00:00 PST 2017,income,500.0, tutor
 guoyi,8e32503b07f26b507a609f135521fca2,Sat Jan 21 00:00:00 PST 2017,other,45.0,gas
 guoyi,8e32503b07f26b507a609f135521fca2,Mon Jan 23 00:00:00 PST 2017,food,23.0,dinner
 guoyi,8e32503b07f26b507a609f135521fca2,Mon Jan 23 00:00:00 PST 2017,bills,20.0,pg&e
-guoyi,8e32503b07f26b507a609f135521fca2,Fri Jan 27 00:00:00 PST 2017,entertainment,35.0,escape room
+guoyi,8e32503b07f26b507a609f135521fca2,Fri Jan 27 00:00:00 PST 2017,shopping,35.0,escape room
 guoyi,8e32503b07f26b507a609f135521fca2,Fri Jan 27 00:00:00 PST 2017,income,500.0, tutor
-guoyi,8e32503b07f26b507a609f135521fca2,Tue Feb 07 00:00:00 PST 2017,other,100.0,cloths
+guoyi,8e32503b07f26b507a609f135521fca2,Tue Feb 07 00:00:00 PST 2017,other,100.0,parking permit
 guoyi,8e32503b07f26b507a609f135521fca2,Fri Feb 10 00:00:00 PST 2017,food,5.0,starbucks
 guoyi,8e32503b07f26b507a609f135521fca2,Fri Feb 10 00:00:00 PST 2017,entertainment,30.0, movie
 guoyi,8e32503b07f26b507a609f135521fca2,Sun Feb 12 00:00:00 PST 2017,bills,50.0,electricity bill
 guoyi,8e32503b07f26b507a609f135521fca2,Tue Feb 14 00:00:00 PST 2017,food,40.0,dinner
 guoyi,8e32503b07f26b507a609f135521fca2,Tue Feb 14 00:00:00 PST 2017,other,20.0,target
-guoyi,8e32503b07f26b507a609f135521fca2,Wed Feb 15 00:00:00 PST 2017,education,350.0,register fee
+guoyi,8e32503b07f26b507a609f135521fca2,Wed Feb 15 00:00:00 PST 2017,shopping,350.0,cloths
 guoyi,8e32503b07f26b507a609f135521fca2,Mon Feb 20 00:00:00 PST 2017,other,10.0,parking fee
 guoyi,8e32503b07f26b507a609f135521fca2,Wed Feb 22 00:00:00 PST 2017,bills,30.0
-guoyi,8e32503b07f26b507a609f135521fca2,Sat Feb 25 00:00:00 PST 2017,education,100.0,late fee
+guoyi,8e32503b07f26b507a609f135521fca2,Sat Feb 25 00:00:00 PST 2017,shopping,100.0,cloths
 guoyi,8e32503b07f26b507a609f135521fca2,Thu Mar 02 00:00:00 PST 2017,food,35.0,foodie
 guoyi,8e32503b07f26b507a609f135521fca2,Sun Mar 05 00:00:00 PST 2017,food,40.0,brunch
+guoyi,8e32503b07f26b507a609f135521fca2,Thu Mar 16 00:00:00 PDT 2017,food,10.0,sandwich
+grace,202cb962ac59075b964b07152d234b70,Thu Mar 16 00:00:00 PDT 2017,bills,100.0
+abc,900150983cd24fb0d6963f7d28e17f72

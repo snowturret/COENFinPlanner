@@ -11,7 +11,11 @@ import java.util.Date;
 import java.util.Scanner;
 
 /**
- * Created by raoyinchen on 3/13/17.
+ * Created by xiwang on 3/13/17.
+ */
+
+/**
+ * Financial history board; it will display all entries that the user had enter before.
  */
 public class RecommendBoard extends JFrame {
 
@@ -26,29 +30,34 @@ public class RecommendBoard extends JFrame {
         while(scan.hasNextLine()){
             String line = scan.nextLine();
 
-
             if (line.startsWith(Spendy.getCurrentUser().getName())) {
                 String[] subrecords = line.split(",");
                 StringBuilder subres = new StringBuilder();
 
-                String start_dt = subrecords[2];
-                DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
-                Date date = (Date)formatter.parse(start_dt);
-                SimpleDateFormat newFormat = new SimpleDateFormat("yyyy/MM/dd");
-                String finalString = newFormat.format(date);
-                subres.append(finalString + " ");
-                for(int i = 3; i < subrecords.length;i++) {
-                    if (!subrecords[i].equals("null")) {
-                        subres.append(subrecords[i] + " ");
+                if (subrecords.length > 2) {
+                    String start_dt = subrecords[2];
+                    DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
+                    Date date = (Date)formatter.parse(start_dt);
+                    SimpleDateFormat newFormat = new SimpleDateFormat("yyyy/MM/dd");
+                    String finalString = newFormat.format(date);
+                    subres.append(finalString + " ");
+                    for(int i = 3; i < subrecords.length;i++) {
+                        if (!subrecords[i].equals("null")) {
+                            subres.append(subrecords[i] + " ");
+                        }
                     }
+                    records.add(subres.toString());
                 }
-                records.add(subres.toString());
             }
 
         }
         StringBuilder showString = new StringBuilder();
-        for(String each: records) {
-            showString.append(each + "\n");
+        if (records == null || records.size() == 0 ){
+            showString.append(" ");
+        } else {
+            for(String each: records) {
+                showString.append(each + "\n");
+            }
         }
 
         JTextArea textArea = new JTextArea("Here is your spending history  \n\n" + showString.toString() +

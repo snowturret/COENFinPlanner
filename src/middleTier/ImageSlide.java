@@ -1,13 +1,15 @@
 package middleTier;
 
 /**
- * Created by raoyinchen on 3/13/17.
+ * Created by xiwang on 3/13/17.
  */
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
-
+/**
+ * set image's height, weight and layout; for animation.
+ */
 public class ImageSlide extends JPanel
 {
 

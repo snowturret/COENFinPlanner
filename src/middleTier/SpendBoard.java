@@ -11,7 +11,12 @@ import java.util.Date;
 import java.util.Vector;
 
 /**
- * Created by raoyinchen on 3/5/17.
+ * Created by xiwang on 3/5/17.
+ */
+
+/**
+ * Spend board for user to add entry; each entry must have a valid date; valid amount and a category that user; comment is
+ * optional; If there is a wrong input; a error message will be popup;
  */
 public class SpendBoard extends JFrame {
     private JFormattedTextField activityDateInput;
@@ -42,7 +47,6 @@ public class SpendBoard extends JFrame {
         type.setLayout(new BoxLayout(type, BoxLayout.Y_AXIS));
         comment.setLayout(new BoxLayout(comment, BoxLayout.Y_AXIS));
 
-//        activityDateInput = new JTextField(10);
         DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
         activityDateInput = new JFormattedTextField(format);
         activityMoneyInput = new JTextField(20);

@@ -4,7 +4,7 @@ package middleTier;
  * Created by guoyiruan on 3/9/17.
  */
 /**
- * Created by raoyinchen on 3/7/17.
+ * Created by xiwang on 3/7/17.
  */
 
 import org.jfree.chart.ChartFactory;
@@ -17,7 +17,9 @@ import org.jfree.ui.ApplicationFrame;
 
 import java.util.ArrayList;
 
-
+/**
+ * generate bar chart;
+ */
 public class HistogramGenerator extends ApplicationFrame
 {
 
@@ -41,6 +43,12 @@ public class HistogramGenerator extends ApplicationFrame
         return chartPanel;
     }
 
+    /**
+     * create database to set value for each categories;
+     * @param entries
+     * @param type
+     * @return
+     */
     private static CategoryDataset createDataset(ArrayList<Entry> entries, EntryType type) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         if (type != EntryType.ALL) {

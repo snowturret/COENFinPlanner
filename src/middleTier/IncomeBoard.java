@@ -1,6 +1,6 @@
 package middleTier;
 /**
- * Created by raoyinchen on 3/5/17.
+ * Created by xiwang  on 3/5/17.
  */
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by raoyinchen on 3/5/17.
+ * income board for user to add income entry; each entry must have a valid date; valid amount and a category; comment is
+ * optional; If there is a wrong input; a error message will be popup;
  */
 public class IncomeBoard extends JFrame {
     private JFormattedTextField activityDateInput;
@@ -24,7 +25,6 @@ public class IncomeBoard extends JFrame {
     private JLabel activityType;
     private JLabel activityComment;
     Container container = getContentPane();
-//    HashMap<String,String> saveItems = new HashMap<>();
     MainScreen backToMain;
 
     public IncomeBoard(){

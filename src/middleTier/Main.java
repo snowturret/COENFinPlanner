@@ -1,6 +1,6 @@
 package middleTier;
 /**
- * Created by raoyinchen on 3/5/17.
+ * Created by xiwang on 3/5/17.
  */
 
 import javax.swing.*;
@@ -10,20 +10,19 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * main class to start the program; run animation and log file.
+ */
 public class Main {
     public static void main(String[] args) {
         AutoSlide i1 = new AutoSlide();
         final String FILE_PATH = "DB.txt";
         try {
-//            importFile("src/test.csv");
             Spendy.readFile(FILE_PATH);
-//            System.out.println("read file done");
 
         }catch (FileNotFoundException ex) {
-//            System.out.println("something wrong with file");
             System.out.println("something wrong read file");
         }
-//        Spendy s = new Spendy();
 
         final JFrame board = new JFrame("Financial Recommendar");
         final JButton btnLogin = new JButton("Click to login");

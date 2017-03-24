@@ -13,7 +13,13 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Created by raoyinchen on 3/5/17.
+ * Created by xiwang on 3/5/17.
+ */
+
+/**
+ * Track board will generate different charts for user to visually see their spending; user could choose a start date
+ * a end date, a category or leave it blank; system will collaborate valid entries, user may choose one of these three
+ * chart to display it. options are pie chart, bar chart or a xy chart;
  */
 public class TrackBoard extends JFrame {
     private JFormattedTextField activityStartDateInput;
@@ -189,12 +195,6 @@ public class TrackBoard extends JFrame {
         setResizable(false);
         setVisible(true);
         setLocationRelativeTo(null);
-
-//        try {
-//            Spendy.saveFile();
-//        }catch (IOException io){
-//            System.out.println ("Error in saving file2");
-//        }
     }
 
 }

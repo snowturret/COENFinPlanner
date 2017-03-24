@@ -11,6 +11,9 @@ import org.jfree.ui.RefineryUtilities;
 import javax.swing.*;
 import java.util.ArrayList;
 
+/**
+ * generate a pie chart; it will show the percentage of each category for particular time period.
+ */
 public class PieGenerator extends ApplicationFrame
 {
     public PieGenerator( String title )

@@ -8,8 +8,14 @@ public class Entry {
 	private EntryType category;
 	private float value;
 	private String description;
-	
-	
+
+	/**
+	 * constructor
+	 * @param entrydate
+	 * @param category
+	 * @param value amount of spending
+	 * @param description comments
+	 */
 	public Entry(Date entrydate, EntryType category, float value, String description)
 	{
 		this.entryDate = entrydate;
@@ -18,26 +24,36 @@ public class Entry {
 		this.description = description;
 	}
 
+	/**
+	 * getter; get the entry date;
+	 * @return date
+	 */
 	public Date getEntryDate() {
 		return entryDate;
 	}
 
+	/**
+	 * getter; get the category;
+	 * @return EntryType
+	 */
 	public EntryType getCategory() {
 		return category;
 	}
 
+	/**
+	 * getter; get the amount of spending;
+	 * @return float value
+	 */
 	public float getValue() {
 		return value;
 	}
 
+	/**
+	 * getter; get the comments
+	 * @return string description.
+	 */
 	public String getDescription() {
 		return description;
 	}
-
-	// Just leaving here for now until we have a better place to put it
-    public static void main(String[] args) {
-        System.out.println("Hello, World");
-    }
-
 
 }

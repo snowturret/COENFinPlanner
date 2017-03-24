@@ -1,7 +1,7 @@
 package middleTier;
 
 /**
- * Created by raoyinchen on 3/5/17.
+ * Created by xiwang on 3/5/17.
  */
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +11,11 @@ import java.text.ParseException;
 
 /**
  * Created by guoyiruan on 3/5/17.
+ */
+
+/**
+ * Once you successfully login, this menu will be shown; there are four operations user could do; add spending, add income
+ * track spending and check financial history;
  */
 public class MainScreen extends JFrame {
     JButton spending, income, tracking,recommend;

@@ -6,13 +6,16 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 /**
- * Created by raoyinchen on 3/13/17.
+ * Created by xiwang on 3/13/17.
  */
 public class AutoSlide extends JPanel {
     private int counter = 0;
     private ImageIcon[] image = new ImageIcon[10];
     private JLabel label;
 
+    /**
+     * add images into an array of imageIcon; using timer to iterate the image and set different images to JLabel;
+     */
     public AutoSlide() {
         for (int i = 0; i < image.length; ++i)
             image[counter++] = new ImageIcon("src/pic" + i +".png");
@@ -26,6 +29,9 @@ public class AutoSlide extends JPanel {
 
     }
 
+    /**
+     * set listener; reset new imageIcon based on the delay time;
+     */
     class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             counter++;

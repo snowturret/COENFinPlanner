@@ -18,8 +18,30 @@ public class Spendy {
     private static final String FILE_PATH = "DB.txt";
 
     public Spendy(){
+
     }
 
+    /**
+     * usage: verify the input name; if the name exists in database  return false;  otherwise return true;
+     * @param name
+     * @return
+     */
+    public static boolean validUsername(String name) {
+        for(User user : users) {
+            if(user.getName().equals(name)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * login; check the username and password are corresponding to database; if the user exists in db; set the user to
+     * current user and return true; otherwise; set currentUser to null and return false;
+     * @param name
+     * @param password
+     * @return
+     */
     public static boolean login(String name, String password) {
         for(User user : users) {
             if(user.getName().equals(name) && user.getPassword().equals(password)) {
@@ -31,16 +53,28 @@ public class Spendy {
         return false;
     }
 
+    /**
+     * create a new user; and set this user to current user;
+     * @param name
+     * @param password
+     */
     public static void register(String name, String password) {
         User u = new User(name, password);
         users.add(u);
         currentUser = u ;
     }
 
+    /**
+     * getter; get the currentUser;
+     * @return
+     */
     public static User getCurrentUser() {
         return currentUser;
     }
 
+    /**
+     * setter; reset the CurrentUser;
+     */
     public static void cleanCurrentUser() {
         currentUser = null;
     }
@@ -49,6 +83,13 @@ public class Spendy {
         cleanCurrentUser();
     }
 
+    /**
+     * create a new entry for currentUser
+     * @param entryDate
+     * @param category
+     * @param value
+     * @param description
+     */
     public static void createNewEntry(Date entryDate, EntryType category, float value ,String description){
         currentUser.getEntries().add(new Entry (entryDate,category,value,description));
     }
@@ -79,6 +120,14 @@ public class Spendy {
         }
     }
 
+    /**
+     * return the tracking entries; based on the parameters; if the entry type is ALL; return all entries from the
+     * startDate to endDate. if the entry type is a particular type; verify it and return the correct entries;
+     * @param startDate
+     * @param endDate
+     * @param category
+     * @return arraylist of entries
+     */
     public static ArrayList<Entry> trackingResults(Date startDate, Date endDate,EntryType category){
         ArrayList<Entry> results = new ArrayList<>();
         if (category == EntryType.ALL) {
@@ -138,6 +187,10 @@ public class Spendy {
         return results;
     }
 
+    /**
+     * Save data; iterate each user in list of users; and iterate each entry from the list; write to a txt file;
+     * @throws IOException
+     */
     public static void saveFile ()throws IOException {
         File fout = new File("DB.txt");
         FileOutputStream fos = new FileOutputStream(fout);
@@ -160,15 +213,20 @@ public class Spendy {
                             user.getEntries().get(i).getDescription());
                 }
 
-//                System.out.println(user.getName() + "," + user.getPassword() + "," + user.getEntries().get(i).getEntryDate().toString()
-//                        + "," + user.getEntries().get(i).getCategory().toString() + "," + String.valueOf(user.getEntries().get(i).getValue()) + "," +
-//                        user.getEntries().get(i).getDescription());
                 bw.newLine();
             }
         }
         bw.close();
         System.out.println("Success");
     }
+
+    /**
+     * check the user is exist or not; if it already exist; append the entry to the existed user; if not create a new user
+     * and add the entry to the new user.
+     * @param name
+     * @param password
+     * @return
+     */
     public static boolean duplicateUser(String name, String password) {
         for (User user : users) {
             if (user.getName().equals(name) && user.getPassword().equals(password)){
@@ -178,7 +236,11 @@ public class Spendy {
         return false;
     }
 
-
+    /**
+     * Read file; add all the data to the system.
+     * @param FILE_PATH
+     * @throws FileNotFoundException
+     */
     public static void readFile (String FILE_PATH)throws FileNotFoundException {
         Scanner scan = new Scanner(new File(FILE_PATH));
         User current = null;

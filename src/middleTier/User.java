@@ -5,6 +5,10 @@ import java.util.ArrayList;
 /**
  * Created by guoyiruan on 3/6/17.
  */
+
+/**
+ * User has a username, password, and a list of entries;
+ */
 public class User {
 
     private String name;
